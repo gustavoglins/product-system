@@ -51,7 +51,7 @@
                         <div class="input-group-option">
                             <label for="available">Sim</label>
                             <input type="radio" id="available" th:field="*{available}" value="true" checked="checked" />
-                        </div>                        
+                        </div>
                         <div class="input-group-option">
                             <label for="not-available">Não</label>
                             <input type="radio" id="not-available" th:field="*{available}" value="false" />
@@ -141,7 +141,31 @@
                 return false;
             }
 
+            const nameField = document.getElementById('name');
+            const nameValue = nameField.value;
+
+            if (!validateProductName(nameValue)) {
+                alert("Este produto já está registrado.");
+                return false;
+            }
+
             return true;
+        };
+
+        const validateProductName = (name) => {
+            let isValid = true;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `/api/product/check-name?name=${name}`, false);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    isValid = response.isUnique;
+                }
+            };
+            xhr.send();
+
+            return isValid;
         };
 
         const validateDeleteForm = () => {

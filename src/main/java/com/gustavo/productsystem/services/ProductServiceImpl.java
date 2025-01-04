@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -40,6 +41,12 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList = repository.findAll(sort);
         return productMapper.toResponseList(productList);
     }
+
+    public boolean isProductNameUnique(String name) {
+        Optional<Product> existingProduct = repository.findByName(name);
+        return !existingProduct.isPresent();
+    }
+
 
     @Override
     public void deleteByIds(List<Long> productIdList) {

@@ -14,4 +14,6 @@ public interface ProductService {
     List<ProductDto> findAll(Sort sort);
 
     void deleteByIds(List<Long> productIdList);
+
+    boolean isProductNameUnique(String name);
 }
