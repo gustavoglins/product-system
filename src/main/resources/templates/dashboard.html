@@ -9,24 +9,30 @@
 </head>
 
 <body>
+    <div th:if="${error}">
+        <p class="error-message" th:text="${error}"></p>
+    </div>
+
     <div class="product-actions-container">
 
-        <!-- Button to add a new product -->
+        <!-- Botão para adicionar um novo produto -->
         <button class="secondary-btn" onclick="showProductDialog(true)">Adicionar Produto</button>
 
-        <!-- Form to remove a product -->
-        <form th:action="@{/api/product/delete}" method="post" id="delete-products-form">
+        <!-- Formulário para remover produtos -->
+        <form th:action="@{/api/product/delete}" method="post" id="delete-products-form"
+            onsubmit="return validateDeleteForm()">
             <input type="hidden" name="productIds" id="product-ids" />
             <button class="secondary-btn" type="submit" id="remove-selected-products">Remover Produto</button>
         </form>
     </div>
 
-    <!-- Dialog for creating a new product -->
+    <!-- Dialog para criar um novo produto -->
     <dialog class="new-product-dialog" id="new-product-dialog">
         <div class="wrapper">
             <h2 class="dialog-title">Novo Produto</h2>
 
-            <form class="dialog-form" th:action="@{/api/product}" method="post" th:object="${product}">
+            <form class="dialog-form" th:action="@{/api/product}" method="post" th:object="${product}"
+                onsubmit="return validateProductForm()">
                 <div class="input-wrapper">
                     <div class="input-group">
                         <label for="name">Nome</label>
@@ -44,8 +50,8 @@
                         <label>Disponível para venda</label>
                         <div class="input-group-option">
                             <label for="available">Sim</label>
-                            <input type="radio" id="available" th:field="*{available}" value="true" />
-                        </div>
+                            <input type="radio" id="available" th:field="*{available}" value="true" checked="checked" />
+                        </div>                        
                         <div class="input-group-option">
                             <label for="not-available">Não</label>
                             <input type="radio" id="not-available" th:field="*{available}" value="false" />
@@ -62,12 +68,10 @@
     <div class="product-list-container">
         <h1 class="hero-title">Produtos Cadastrados</h1>
 
-        <!-- Message when there ara no products registereds -->
         <div class="empty-state" th:if="${#lists.isEmpty(products)}">
             <p class="action-suggestion">Clique no botão acima para adicionar o primeiro produto!</p>
         </div>
 
-        <!-- Table for listing products -->
         <table class="product-table" th:if="${!#lists.isEmpty(products)}">
             <thead>
                 <tr>
@@ -124,6 +128,39 @@
             // Put the IDs in the hidden field to send in the form
             document.getElementById("product-ids").value = selectedProductIds.join(",");
         });
+
+        // Função de validação do formulário de produto
+        const validateProductForm = () => {
+            const priceField = document.getElementById('price');
+            const priceValue = priceField.value;
+
+            // Verificar se o preço é um número válido
+            if (isNaN(priceValue) || priceValue <= 0) {
+                alert("Por favor, insira um valor válido para o preço (número maior que zero).");
+                return false;  // Impede o envio do formulário
+            }
+
+            // Verificar se uma opção de disponibilidade foi selecionada
+            const availableRadioButtons = document.querySelectorAll('input[name="available"]:checked');
+            if (availableRadioButtons.length === 0) {
+                alert("Por favor, selecione se o produto está disponível ou não.");
+                return false;  // Impede o envio do formulário
+            }
+
+            return true;  // Permite o envio do formulário
+        };
+
+
+        // Função para validar a exclusão de produtos
+        const validateDeleteForm = () => {
+            const selectedCheckboxes = document.querySelectorAll(".product-checkbox:checked");
+
+            if (selectedCheckboxes.length === 0) {
+                alert("Por favor, selecione pelo menos um produto para remover.");
+                return false;  // Impede o envio do formulário
+            }
+            return true;  // Permite o envio do formulário
+        };
     </script>
 
 </body>
