@@ -8,7 +8,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -31,37 +30,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto update(ProductDto productDto) {
-        Optional<Product> optionalProduct = repository.findById(productDto.id());
-        if (optionalProduct.isPresent()) {
-            Product foundProduct = optionalProduct.get();
-
-            foundProduct.setName(productDto.name());
-            foundProduct.setDescription(productDto.description());
-            foundProduct.setPrice(productDto.price());
-            foundProduct.setAvailable(productDto.available());
-
-            repository.save(foundProduct);
-
-            return productMapper.toResponse(foundProduct);
-        } else {
-            throw new RuntimeException("Product not found");
-        }
-    }
-
-    @Override
-    public ProductDto findById(Long id) {
-        Optional<Product> optionalProduct = repository.findById(id);
-        if (optionalProduct.isPresent()) return productMapper.toResponse(optionalProduct.get());
-        else throw new RuntimeException("Product not found");
-    }
-
-    @Override
-    public List<ProductDto> findByName(String name) {
-        return productMapper.toResponseList(repository.findByName(name));
-    }
-
-    @Override
     public List<ProductDto> findAll() {
         List<Product> productList = repository.findAll();
         return productMapper.toResponseList(productList);
@@ -71,13 +39,6 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> findAll(Sort sort) {
         List<Product> productList = repository.findAll(sort);
         return productMapper.toResponseList(productList);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        Optional<Product> optionalProduct = repository.findById(id);
-        if (optionalProduct.isPresent()) repository.deleteById(id);
-        else throw new RuntimeException("Product not found");
     }
 
     @Override
