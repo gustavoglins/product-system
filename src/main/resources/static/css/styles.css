@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+    font-size: 62.5%;
+
+    --primary-color: hsl(202, 100%, 61%);
+    --primary-color-hover : hsl(202, 100%, 50%);
+    --primary-color-active : hsl(202, 100%, 45%);
+    --background-color : #141922;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0 auto;
+    width: 70vw;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    border-radius: .8rem;
+    border: var(--primary-color) .2rem solid;
+    font-weight: 500;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    color: black;
+    transition: background-color .25s ease, border .25s ease;
+}
+.primary-btn:hover {
+    background-color: var(--primary-color-hover);
+    border: var(--primary-color-hover) .2rem solid;
+}
+.primary-btn:active {
+    background-color: var(--primary-color-active);
+    border: var(--primary-color-active) .2rem solid;
+}
+
+.secondary-btn {
+    background-color: transparent;
+    border-radius: .8rem;
+    border: var(--primary-color) .2rem solid;
+    font-weight: 500;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: color .25s ease, border .25s ease;
+}
+.secondary-btn:hover {
+    border: var(--primary-color-hover) .2rem solid;
+    color: var(--primary-color-hover);
+}
+.secondary-btn:active {
+    border: var(--primary-color-active) .2rem solid;
+    color: var(--primary-color-active);
+}
+
+.product-actions-container {
+    margin: 10rem 0 5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    flex-grow: 1;
+    gap: 1rem;
+}
+
+.searchbar {
+    background-color: #0f101a;
+    border: #262626 .2rem solid;
+    padding: .5rem 2rem;
+    border-radius: 1rem;
+    color: white;
+    flex-grow: 1;
+}
+
+.searchbar:focus {
+    border: var(--primary-color) .2rem solid;
+    outline: none;
+}
+
+.new-product-dialog {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+    z-index: 1000;
+    border-radius: 1rem;
+}
+
+.new-product-dialog::backdrop {
+    background-color: rgba(12, 12, 12, .2);
+    backdrop-filter: blur(.1rem)
+}
+
+.new-product-dialog .wrapper {
+    padding: 2rem;
+    width: 80rem;
+    max-width: 100rem;
+    background-color: white;
+    border-radius: .8rem;
+}
+
+.dialog-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.input-group input {
+    padding: 0.8rem;
+    font-size: 1.6rem;
+    border: .1rem solid #ccc;
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+.input-group-option {
+    display: flex;
+}
+
+.input-group-option input[type="radio"] {
+    transform: scale(0.6);
+}
+
+.dialog-form .primary-btn {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.dialog-form .secondary-btn {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.hero-title {
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+}
+
+.action-suggestion {
+    color: white;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5rem 0;
+    font-size: 1.6rem;
+    text-align: left;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #1f2833;
+}
+
+.product-table thead tr {
+    background-color: var(--primary-color);
+    color: black;
+    font-weight: bold;
+}
+
+.product-table th,
+.product-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 0.1rem solid #2d2f36;
+}
+
+.product-table tbody tr {
+    transition: background-color 0.25s ease;
+}
+
+.product-table tbody tr:nth-of-type(even) {
+    background-color: #2d2f36;
+}
+
+.product-table tbody tr:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.product-table td {
+    color: white;
+}
+
+.styled-table th:first-child,
+.styled-table td:first-child {
+    text-align: center;
+    width: 5rem;
+}
+
+.product-checkbox {
+    transform: scale(1.2);
+    cursor: pointer;
+}
