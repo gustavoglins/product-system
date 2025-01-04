@@ -20,11 +20,11 @@ Antes de rodar a aplicação, é necessário ter instalado:
 1. Clonar o Repositório
 
 ```
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/gustavoglins/product-system.git
 ```
 2. Entrar na pasta do projeto
 ```
-cd nome-do-repositorio
+cd product-system
 ```
 
 3. Executar o projeto:
