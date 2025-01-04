@@ -1,8 +1,5 @@
 spring:
   datasource:
-    # url: jdbc:postgresql://localhost:5432/db_product
-    # username: postgres
-    # password: postgres
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
     username: sa
@@ -14,6 +11,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    open-in-view: true
   h2:
     console:
       enabled: true
