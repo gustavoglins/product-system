@@ -25,13 +25,6 @@ public class PagesController {
         return "dashboard";
     }
 
-//    @GetMapping("/dashboard")
-//    public String showDashboard(Model model) {
-////        List<Product> products = productRepository.findAll(Sort.by(Sort.Direction.ASC, "price"));
-//        model.addAttribute("products", products);
-//        return "dashboard";
-//    }
-
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
         List<ProductDto> products = productService.findAll(Sort.by(Sort.Direction.ASC, "price"));
