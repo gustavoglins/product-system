@@ -15,10 +15,10 @@
 
     <div class="product-actions-container">
 
-        <!-- Botão para adicionar um novo produto -->
+        <!-- Button to add a new product -->
         <button class="secondary-btn" onclick="showProductDialog(true)">Adicionar Produto</button>
 
-        <!-- Formulário para remover produtos -->
+        <!-- form to removes products -->
         <form th:action="@{/api/product/delete}" method="post" id="delete-products-form"
             onsubmit="return validateDeleteForm()">
             <input type="hidden" name="productIds" id="product-ids" />
@@ -26,7 +26,7 @@
         </form>
     </div>
 
-    <!-- Dialog para criar um novo produto -->
+    <!-- Dialog to create a new product -->
     <dialog class="new-product-dialog" id="new-product-dialog">
         <div class="wrapper">
             <h2 class="dialog-title">Novo Produto</h2>
@@ -108,14 +108,12 @@
             });
         };
 
-        // Function to catch the IDs of selected products
         const getSelectedProducts = () => {
             const selectedCheckboxes = document.querySelectorAll(".product-checkbox:checked");
             const selectedProductIds = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
             return selectedProductIds;
         };
 
-        // When submitting the delete form, get the IDs of the marked products.
         document.getElementById("delete-products-form").addEventListener("submit", function (event) {
             const selectedProductIds = getSelectedProducts();
 
@@ -125,41 +123,35 @@
                 return;
             }
 
-            // Put the IDs in the hidden field to send in the form
             document.getElementById("product-ids").value = selectedProductIds.join(",");
         });
 
-        // Função de validação do formulário de produto
         const validateProductForm = () => {
             const priceField = document.getElementById('price');
             const priceValue = priceField.value;
 
-            // Verificar se o preço é um número válido
             if (isNaN(priceValue) || priceValue <= 0) {
                 alert("Por favor, insira um valor válido para o preço (número maior que zero).");
-                return false;  // Impede o envio do formulário
+                return false;
             }
 
-            // Verificar se uma opção de disponibilidade foi selecionada
             const availableRadioButtons = document.querySelectorAll('input[name="available"]:checked');
             if (availableRadioButtons.length === 0) {
                 alert("Por favor, selecione se o produto está disponível ou não.");
-                return false;  // Impede o envio do formulário
+                return false;
             }
 
-            return true;  // Permite o envio do formulário
+            return true;
         };
 
-
-        // Função para validar a exclusão de produtos
         const validateDeleteForm = () => {
             const selectedCheckboxes = document.querySelectorAll(".product-checkbox:checked");
 
             if (selectedCheckboxes.length === 0) {
                 alert("Por favor, selecione pelo menos um produto para remover.");
-                return false;  // Impede o envio do formulário
+                return false;
             }
-            return true;  // Permite o envio do formulário
+            return true;
         };
     </script>
 
