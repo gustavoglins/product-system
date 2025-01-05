@@ -33,3 +33,9 @@ mvn spring-boot:run
 ```
 
 #### Isso iniciará o servidor backend, que estará disponível em http://localhost:8080.
+
+## Prévia do Projeto
+
+![Preview 1](src/main/resources/static/images/Preview1.png)
+![Preview 2](src/main/resources/static/images/Preview2.png)
+![Preview 3](src/main/resources/static/images/Preview3.png)
